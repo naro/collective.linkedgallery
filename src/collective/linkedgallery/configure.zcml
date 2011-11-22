@@ -1,0 +1,44 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="collective.linkedgallery">
+
+    <five:registerPackage package="." initialize=".initialize" />
+    <include package="collective.fancybox" />
+    <include package="archetypes.schemaextender" />
+
+    <i18n:registerTranslations directory="locales" />
+
+    <include package=".browser" />
+        
+    <adapter factory=".extender.LinkedGalleryExtender"
+             provides="archetypes.schemaextender.interfaces.ISchemaExtender"
+             name="collective.linkedgallery.gallery"
+             />
+        
+    <five:implements
+        class="Products.ATContentTypes.content.document.ATDocument"
+        interface="collective.linkedgallery.interfaces.ILinkedGalleryAware" />
+
+    <five:implements
+        class="Products.ATContentTypes.content.newsitem.ATNewsItem"
+        interface="collective.linkedgallery.interfaces.ILinkedGalleryAware" />
+        
+    <genericsetup:registerProfile
+        name="default"
+        title="Linked gallery"
+        directory="profiles/default"
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        />
+        
+    <genericsetup:importStep
+        name="collective.linkedgallery"
+        title="LinkedGallery configuration"
+        description=""
+        handler="collective.linkedgallery.setuphandlers.importVarious">
+        <depends name="propertiestool" />
+    </genericsetup:importStep>
+  
+</configure>

@@ -1,0 +1,34 @@
+<div class="gallery" 
+     tal:define="images view/images" 
+     tal:condition="images"
+     i18n:domain="collective.linkedgallery">
+
+        <script type="text/javascript" charset="utf-8">
+            jq(document).ready(function() {
+                jq('div.gallery a.fancy').fancybox({'type' : 'image'})
+            });
+        </script>
+
+     
+        <h4><a href="" 
+               tal:omit-tag="not:view/showLinkToGallery"
+               tal:attributes="href view/gallery_url" 
+               tal:content="view/gallery_title">Image gallery title</a></h4>
+        <ul tal:define="gallery_id view/gallery_id">
+            <li tal:repeat="image images" class="photoAlbumEntry"
+                ><a class="fancy"
+                    tal:attributes="rel gallery_id;
+                                    title image/title;
+                                    href image/url"
+                    ><img tal:replace="structure image/imgtag" />
+                    <span tal:condition="nothing" tal:content="image/title">
+                       Title
+                    </span>
+                    </a>
+            ></li>
+        </ul>
+        <p class="click-thumbnail-text discreet" tal:condition="view/showClickToEnlarge"><span i18n:translate="text_click_to_enlarge">Click on a thumbnail image to enlarge</span></p>
+        <p class="full-gallery-link" tal:condition="view/showLinkToGallery"><a tal:attributes="href view/gallery_url" i18n:translate="text_link_to_gallery">Click to show full gallery</a></p>
+        
+</div>
+<div class="visualClear"><!-- --></div>

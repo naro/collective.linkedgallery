@@ -1,0 +1,16 @@
+Changelog
+=========
+
+
+1.1 - 2010-03-15
+----------------
+
+* use collective.fancybox instead of collective.fancyzoomview. This allows to
+  create browseable galleries.
+  [naro]
+
+1.0b1 - 
+----------------------
+
+* Initial release
+
