@@ -1,5 +1,5 @@
 from zope.interface import implements
-from zope.component import adapts, getUtility
+from zope.component import adapts
 from archetypes.schemaextender.interfaces import IBrowserLayerAwareExtender
 from archetypes.schemaextender.field import ExtensionField
 from Products.Archetypes.atapi import ReferenceField, AnnotationStorage
@@ -9,8 +9,10 @@ from collective.linkedgallery.interfaces import ILinkedGallerySpecific
 from collective.linkedgallery.interfaces import ILinkedGalleryAware
 from collective.linkedgallery import linkedGalleryMessageFactory as _
 
+
 class ExtReferenceField(ExtensionField, ReferenceField):
     """ just a field """
+
 
 class LinkedGalleryExtender(object):
     adapts(ILinkedGalleryAware)
@@ -21,24 +23,24 @@ class LinkedGalleryExtender(object):
     fields = [
         ExtReferenceField(
             name='linkedGallery',
-            required = False,
-            storage = AnnotationStorage(),
-            languageIndependent = True,
+            required=False,
+            storage=AnnotationStorage(),
+            languageIndependent=True,
             multiValued=False,
             relationship='isGalleryOf',
-            keepReferencesOnCopy = True,
+            keepReferencesOnCopy=True,
             allowed_types=('Folder',),
-            widget = ReferenceBrowserWidget(
+            widget=ReferenceBrowserWidget(
                            label=_(u"Gallery"),
-                           description=_(u"Select folder with images. These images may be displayed under the body as gallery." ),
+                           description=_(u"Select folder with images. These images may be displayed under the body as gallery."),
                            force_close_on_insert=1,
                            hide_inaccessible=True,
                  ),
-        ),            
+        ),
     ]
-    
+
     def __init__(self, context):
         self.context = context
-        
+
     def getFields(self):
         return self.fields

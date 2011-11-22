@@ -1,7 +1,6 @@
 from Acquisition import aq_inner
 from zope.interface import implements
-from zope.component import getMultiAdapter, getUtility, queryAdapter
-from plone.memoize import view
+from zope.component import getUtility
 from random import shuffle
 
 from Products.CMFCore.utils import getToolByName
@@ -10,6 +9,7 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.layout.viewlets.common import ViewletBase
 from collective.linkedgallery.browser.interfaces import IGalleryViewlet
 
+
 class GalleryViewlet(ViewletBase):
     implements(IGalleryViewlet)
     index = ViewPageTemplateFile('gallery.pt')
@@ -17,7 +17,7 @@ class GalleryViewlet(ViewletBase):
     _images = []
     _gallery = None
     showClickToEnlarge = True
-    
+
     def render(self):
         return self.index()
 
@@ -80,21 +80,21 @@ class GalleryViewlet(ViewletBase):
                 for id in ids:
                     if showTitles:
                         img = gallery[id]
-                        item = dict(title = img.Title(),
-                                    alt   = img.Description(),
-                                    url   = img.absolute_url(),
-                                    imgtag = img.tag(scale='thumb'),
-                                    imgtag_large = img.tag(scale='large'),
+                        item = dict(title=img.Title(),
+                                    alt=img.Description(),
+                                    url=img.absolute_url(),
+                                    imgtag=img.tag(scale='thumb'),
+                                    imgtag_large=img.tag(scale='large'),
                                     )
                     else:
                         image_url = "%s/%s" % (gallery_url, id)
-                        item = dict(title = '',
-                                    alt   = '',
-                                    url   = image_url,
-                                    imgtag = '<img src="%s/image_thumb" />' % image_url,
-                                    imgtag_large = '<img src="%s/image_large" />' % image_url,
+                        item = dict(title='',
+                                    alt='',
+                                    url=image_url,
+                                    imgtag='<img src="%s/image_thumb" />' % image_url,
+                                    imgtag_large='<img src="%s/image_large" />' % image_url,
                                     )
-                                    
+
                     result.append(item)
-        self._images = result  
+        self._images = result
         self._gallery = aq_inner(gallery)

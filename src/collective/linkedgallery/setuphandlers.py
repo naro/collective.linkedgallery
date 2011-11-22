@@ -1,5 +1,4 @@
 from Products.CMFCore.utils import getToolByName
-from zope.component import getUtility
 
 _PROPERTIES = [
     # Randomize photos in the gallery
@@ -14,16 +13,15 @@ _PROPERTIES = [
     dict(name='showClickToEnlarge', type_='boolean', value=True),
 ]
 
+
 def importVarious(context):
     if not context.readDataFile('collective.linkedgallery.txt'):
         return
-        
+
     site = context.getSite()
     ptool = getToolByName(site, 'portal_properties')
     props = ptool.linkedgallery_properties
-    
+
     for prop in _PROPERTIES:
         if not props.hasProperty(prop['name']):
             props.manage_addProperty(prop['name'], prop['value'], prop['type_'])
-
-    

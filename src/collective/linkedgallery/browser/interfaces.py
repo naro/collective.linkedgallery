@@ -1,10 +1,11 @@
 from zope.interface import Interface
 
+
 class IGalleryViewlet(Interface):
     """ """
     def images():
         """ return list of dicts with image data """
-        
+
     def gallery_title():
         """ """
 
