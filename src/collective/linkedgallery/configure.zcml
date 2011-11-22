@@ -18,13 +18,13 @@
              name="collective.linkedgallery.gallery"
              />
         
-    <five:implements
-        class="Products.ATContentTypes.content.document.ATDocument"
-        interface="collective.linkedgallery.interfaces.ILinkedGalleryAware" />
+    <class class="Products.ATContentTypes.content.document.ATDocument">
+        <implements interface="collective.linkedgallery.interfaces.ILinkedGalleryAware" />
+    </class>
 
-    <five:implements
-        class="Products.ATContentTypes.content.newsitem.ATNewsItem"
-        interface="collective.linkedgallery.interfaces.ILinkedGalleryAware" />
+    <class class="Products.ATContentTypes.content.newsitem.ATNewsItem">
+        <implements interface="collective.linkedgallery.interfaces.ILinkedGalleryAware" />
+    </class>
         
     <genericsetup:registerProfile
         name="default"

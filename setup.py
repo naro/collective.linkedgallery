@@ -32,6 +32,7 @@ setup(name='collective.linkedgallery',
           # -*- Extra requirements: -*-
           'collective.fancybox',
           'archetypes.schemaextender',
+          'archetypes.referencebrowserwidget',
       ],
       tests_require=tests_require,
       extras_require={'tests': tests_require},
